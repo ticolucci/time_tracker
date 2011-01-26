@@ -29,3 +29,6 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 # group :development, :test do
 #   gem 'webrat'
 # end
+gem 'nifty-generators'
+gem "mocha", :group => :test
+gem "bcrypt-ruby", :require => "bcrypt"
