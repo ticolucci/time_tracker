@@ -12,5 +12,10 @@
     <%= f.label :duration %><br />
     <%= f.text_field :duration %>
   </p>
-  <p><%= f.submit %></p>
+	<p>
+		<%= f.label :user %> <br/>
+		<%= f.select :user_id, User.all.collect {|p| [ p.username, p.id ] }%>
+	</p>
+	
+	<p><%= f.submit %></p>
 <% end %>

@@ -12,6 +12,10 @@
   <strong>Duration:</strong>
   <%= @task.duration %>
 </p>
+<p>
+	<strong>User:</strong>
+	<%= @task.user.username %>
+</p>
 
 <p>
   <%= link_to "Edit", edit_task_path(@task) %> |
