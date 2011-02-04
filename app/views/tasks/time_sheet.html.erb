@@ -1,0 +1,13 @@
+<% title "Time Sheet"%>
+<h2> Person: <strong><%=h @user.username %></strong></h2>
+<% @tasks.each do |task| %>
+	<h3>Task: <%=h task.description %></h3>
+	Entries:
+	<ul>
+		<% task.entries.select {|e| e.begin >= @from_date}.each do |entry| %>
+			<li> At <%=h entry.begin %> for <%=h pluralize entry.duration, 'hour' %></li>
+		<% end %>
+	</ul>
+<% end %>
+
+<%= link_to 'Back', :back %>

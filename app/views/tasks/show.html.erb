@@ -5,16 +5,21 @@
   <%= @task.description %>
 </p>
 <p>
-  <strong>Begin:</strong>
-  <%= @task.begin %>
-</p>
-<p>
-  <strong>Duration:</strong>
-  <%= @task.duration %>
-</p>
-<p>
 	<strong>User:</strong>
 	<%= @task.user.username %>
+</p>
+
+<p>
+	<strong>Entries:</strong>
+	<ul>
+		<% @task.entries.each do |entry| %>
+			<li> At <%=h entry.begin %> for <%=h pluralize entry.duration, 'hour' %> | <%= link_to "Edit", edit_task_entry_path(@task, entry) %></li>
+		<% end %>
+	</ul>
+</p>
+
+<p id='new_entry'>
+	<strong><%= link_to "Add entry", new_task_entry_path(@task) %></strong>
 </p>
 
 <p>

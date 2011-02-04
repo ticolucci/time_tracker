@@ -4,14 +4,6 @@
     <%= f.label :description %><br />
     <%= f.text_area :description %>
   </p>
-  <p>
-    <%= f.label :begin %><br />
-    <%= f.date_select :begin %>
-  </p>
-  <p>
-    <%= f.label :duration %><br />
-    <%= f.text_field :duration %>
-  </p>
 	<p>
 		<%= f.label :user %> <br/>
 		<%= f.select :user_id, User.all.collect {|p| [ p.username, p.id ] }%>

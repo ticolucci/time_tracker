@@ -9,14 +9,14 @@
   </head>
   <body>
     <div id="container">
-			<div id="header">
-				<% if current_user %>
-					<%= current_user.username %> | <%= link_to 'logout', logout_path %>
-				<% end %>
-			</div>
       <% flash.each do |name, msg| %>
         <%= content_tag :div, msg, :id => "flash_#{name}" %>
       <% end %>
+					<div id="header">
+						<% if current_user %>
+							<%= link_to current_user.username, edit_current_user_path %> | <%= link_to 'logout', logout_path %>
+						<% end %>
+					</div>
       <%= content_tag :h1, yield(:title) if show_title? %>
       <%= yield %>
     </div>

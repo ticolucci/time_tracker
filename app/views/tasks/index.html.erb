@@ -1,18 +1,30 @@
 <% title "Tasks" %>
 
+<div id="date_for_timesheet">
+	<% form_tag time_sheet_path do %>
+		<p>
+			Generate time sheet from
+			<%= select_date @begin_sheet_date %>
+			<%= submit_tag "Generate" %>
+		</p>
+	<% end %>
+	
+</div>
+
 <table>
   <tr>
     <th>Description</th>
-    <th>Begin</th>
-    <th>Duration</th>
     <th>User</th>
+		<th>Entries</th>
   </tr>
   <% for task in @tasks %>
     <tr>
       <td><%= task.description %></td>
-      <td><%= task.begin %></td>
-      <td><%= task.duration %></td>
       <td><%= task.user.username %></td>
+			<td><ul><% task.entries.each do |entry| %> 
+				<li> At <%= entry.begin %> for <%=h pluralize entry.duration, 'hour' %></li>
+			<% end %>
+			</ul></td>
       <td><%= link_to "Show", task %></td>
       <td><%= link_to "Edit", edit_task_path(task) %></td>
       <td><%= link_to "Destroy", task, :confirm => 'Are you sure?', :method => :delete %></td>
