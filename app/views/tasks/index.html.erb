@@ -21,7 +21,7 @@
     <tr>
       <td><%= task.description %></td>
       <td><%= task.user.username %></td>
-			<td><ul><% task.entries.each do |entry| %> 
+			<td><ul><% task.entries.sort.each do |entry| %> 
 				<li> At <%= entry.begin %> for <%=h pluralize entry.duration, 'hour' %></li>
 			<% end %>
 			</ul></td>

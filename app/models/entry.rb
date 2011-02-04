@@ -11,4 +11,8 @@ class Entry < ActiveRecord::Base
       entry_with_same_begin.destroy
     end
   end
+  
+  def <=> other
+    self.begin <=> other.begin
+  end
 end

@@ -4,7 +4,7 @@
 	<h3>Task: <%=h task.description %></h3>
 	Entries:
 	<ul>
-		<% task.entries.select {|e| e.begin >= @from_date}.each do |entry| %>
+		<% task.entries.select {|e| e.begin >= @from_date}.sort.each do |entry| %>
 			<li> At <%=h entry.begin %> for <%=h pluralize entry.duration, 'hour' %></li>
 		<% end %>
 	</ul>
