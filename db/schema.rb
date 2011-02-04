@@ -10,12 +10,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110126124636) do
+ActiveRecord::Schema.define(:version => 20110204170541) do
+
+  create_table "entries", :force => true do |t|
+    t.date     "begin"
+    t.integer  "duration"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "task_id"
+  end
 
   create_table "tasks", :force => true do |t|
     t.text     "description"
-    t.date     "begin"
-    t.integer  "duration"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"

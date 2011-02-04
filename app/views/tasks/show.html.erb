@@ -13,7 +13,11 @@
 	<strong>Entries:</strong>
 	<ul>
 		<% @task.entries.each do |entry| %>
-			<li> At <%=h entry.begin %> for <%=h pluralize entry.duration, 'hour' %> | <%= link_to "Edit", edit_task_entry_path(@task, entry) %></li>
+			<li> 
+				At <%=h entry.begin %> for <%=h pluralize entry.duration, 'hour' %> |
+				<%= link_to "Edit", edit_task_entry_path(@task, entry) %> |
+				<%= link_to "Destroy", task_entry_path(@task, entry), :confirm => 'Are you sure?', :method => :delete %>
+			</li>
 		<% end %>
 	</ul>
 </p>

@@ -1,4 +1,5 @@
 TimeTracker::Application.routes.draw do
+
   match 'user/edit' => 'users#edit', :as => :edit_current_user
 
   match 'signup' => 'users#new', :as => :signup
@@ -7,11 +8,15 @@ TimeTracker::Application.routes.draw do
 
   match 'login' => 'sessions#new', :as => :login
 
+  match 'time_sheet' => 'tasks#time_sheet', :as => :time_sheet
+
   resources :sessions
 
   resources :users
 
-  resources :tasks
+  resources :tasks do
+    resources :entries
+  end
   
   root :to => "tasks#index"
   
