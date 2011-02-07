@@ -23,6 +23,12 @@
 				<li> At <%= entry.begin %> for <%=h pluralize entry.duration, 'hour' %></li>
 			<% end %>
 			</ul></td>
+      <td><%= link_to "Add Entry", new_task_entry_path(task) %></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
       <td><%= link_to "Edit", edit_task_path(task) %></td>
       <td><%= link_to "Destroy", task, :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
