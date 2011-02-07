@@ -18,12 +18,11 @@
   </tr>
   <% for task in @tasks %>
     <tr>
-      <td><%= task.description %></td>
+    	<td><%= link_to task.description, task %></td>
 			<td><ul><% task.entries.sort.each do |entry| %> 
 				<li> At <%= entry.begin %> for <%=h pluralize entry.duration, 'hour' %></li>
 			<% end %>
 			</ul></td>
-      <td><%= link_to "Show", task %></td>
       <td><%= link_to "Edit", edit_task_path(task) %></td>
       <td><%= link_to "Destroy", task, :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>

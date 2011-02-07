@@ -4,10 +4,6 @@
     <%= f.label :description %><br />
     <%= f.text_field :description %>
   </p>
-	<p>
-		<%= f.label :user %> <br/>
-		<%= f.select :user_id, User.all.collect {|p| [ p.username, p.id ] } %>
-	</p>
 	
 	<p><%= f.submit %></p>
 <% end %>
