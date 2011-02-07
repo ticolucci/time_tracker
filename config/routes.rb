@@ -9,6 +9,8 @@ TimeTracker::Application.routes.draw do
   match 'login' => 'sessions#new', :as => :login
 
   match 'time_sheet' => 'tasks#time_sheet', :as => :time_sheet
+  
+  match 'time_sheet_download' => 'tasks#time_sheet_download', :as => :time_sheet_download
 
   resources :sessions
 

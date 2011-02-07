@@ -1,9 +1,10 @@
 class TasksController < ApplicationController
   before_filter :login_required
+  layout :determine_layout
   
   def index
-    @tasks = Task.all
-    @begin_sheet_date = Date.civil(Date.today.year, Date.today.month)
+    @tasks = Task.find_all_by_user_id current_user.id
+    @begin_sheet_date = Date.current.beginning_of_month
   end
 
   def show
@@ -49,5 +50,18 @@ class TasksController < ApplicationController
     @from_date = Date.civil params[:date][:year].to_i, params[:date][:month].to_i, params[:date][:day].to_i
     @user = current_user
     @tasks = @user.tasks.select {|t| t.entries.detect {|e| e.begin >= @from_date} }
+  end
+  
+  def time_sheet_download
+    @empty_layout = true
+    @from_date = Date.civil params[:date][:year].to_i, params[:date][:month].to_i, params[:date][:day].to_i
+    @user = current_user
+    @tasks = @user.tasks.select {|t| t.entries.detect {|e| e.begin >= @from_date} }
+    response.headers['Content-Type'] = 'text/csv' # I've also seen this for CSV files: 'text/csv; charset=iso-8859-1; header=present'
+    response.headers['Content-Disposition'] = "attachment; filename=#{current_user.username}-timesheet.csv"
+  end
+  
+  def determine_layout
+    @empty_layout ? nil : 'application'
   end
 end

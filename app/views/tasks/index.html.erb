@@ -4,7 +4,7 @@
 	<% form_tag time_sheet_path do %>
 		<p>
 			Generate time sheet from
-			<%= select_date @begin_sheet_date %>
+			<%= select_date @begin_sheet_date, :discard_day => true %>
 			<%= submit_tag "Generate" %>
 		</p>
 	<% end %>
@@ -14,13 +14,11 @@
 <table>
   <tr>
     <th>Description</th>
-    <th>User</th>
 		<th>Entries</th>
   </tr>
   <% for task in @tasks %>
     <tr>
       <td><%= task.description %></td>
-      <td><%= task.user.username %></td>
 			<td><ul><% task.entries.sort.each do |entry| %> 
 				<li> At <%= entry.begin %> for <%=h pluralize entry.duration, 'hour' %></li>
 			<% end %>

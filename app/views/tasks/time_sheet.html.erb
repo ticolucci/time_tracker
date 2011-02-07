@@ -1,13 +1,52 @@
 <% title "Time Sheet"%>
-<h2> Person: <strong><%=h @user.username %></strong></h2>
-<% @tasks.each do |task| %>
-	<h3>Task: <%=h task.description %></h3>
-	Entries:
-	<ul>
-		<% task.entries.select {|e| e.begin >= @from_date}.sort.each do |entry| %>
-			<li> At <%=h entry.begin %> for <%=h pluralize entry.duration, 'hour' %></li>
-		<% end %>
-	</ul>
+<h2> <%=h @from_date.strftime("%b %Y") %>  </h2>
+
+
+<% form_tag time_sheet_download_path do %>
+	<p>
+		<%= select_date @from_date, :discard_day => true %> <%= submit_tag "Download" %> 
+	</p>
 <% end %>
+
+
+<% days_total = [] %>
+<table border="2" cellspacing="3" cellpadding="5">
+	<tr>
+		<th>Task\Day</th>
+		<% (@from_date.day..@from_date.end_of_month.day).each do |day| %>
+			<th><%=h day %></th>
+			<% days_total[day-1] = 0 %>
+		<% end %>
+	</tr>
+	
+	<% @tasks.each do |task| %>
+		<tr>
+			<td><%=h task.description %></td>
+			<% entries = task.entries.select {|e| e.begin >= @from_date} %>
+			<% (@from_date.day..@from_date.end_of_month.day).each do |day| %>
+				<td>
+					<% if entries.empty? %>
+						0
+						
+					<% else %>
+					  <%=
+					 		task_duration =  entries.first.begin.day == day ? entries.shift.duration : 0 
+							days_total[day-1] += task_duration
+							task_duration
+						%>
+					<% end %>
+				</td>
+			<% end %>
+		</tr>
+	<% end %>
+	<tr>
+		<td><strong>Total per day<strong></td>
+		<% days_total.each do |day_total| %>
+			<td><strong><%=h day_total %><strong></td>
+		<% end %>
+	</tr>
+</table>
+
+<h3>Total of hours: <strong><%=h days_total.sum %></strong></h3>
 
 <%= link_to 'Back', :back %>
