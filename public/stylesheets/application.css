@@ -78,3 +78,9 @@ a {
 .error_messages ul {
   margin: 0;
 }
+
+.scrollable {
+	margin: 0 auto;
+	width: 90%;
+	overflow-x: scroll;
+}
