@@ -4,17 +4,6 @@ class EntriesController < ApplicationController
   def set_up_task
     @task = Task.find(params[:task_id])
   end
-  
-  # GET /entries/1
-  # GET /entries/1.xml
-  def show
-    @entry = Entry.find(params[:id])
-  
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @entry }
-    end
-  end
 
   # GET /entries/new
   # GET /entries/new.xml
@@ -39,7 +28,7 @@ class EntriesController < ApplicationController
     
     respond_to do |format|
       if @entry.save
-        format.html { redirect_to(@task, :notice => 'Entry was successfully created.') }
+        format.html { redirect_to(tasks_url, :notice => 'Entry was successfully created.') }
         format.xml  { render :xml => @entry, :status => :created, :location => @entry }
       else
         format.html { render :action => "new" }
@@ -56,7 +45,7 @@ class EntriesController < ApplicationController
   
     respond_to do |format|
       if @entry.update_attributes(params[:entry])
-        format.html { redirect_to(@task, :notice => 'Entry was successfully updated.') }
+        format.html { redirect_to(tasks_url, :notice => 'Entry was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -72,7 +61,7 @@ class EntriesController < ApplicationController
     @entry.destroy
 
     respond_to do |format|
-      format.html { redirect_to(@task) }
+      format.html { redirect_to(tasks_url) }
       format.xml  { head :ok }
     end
   end

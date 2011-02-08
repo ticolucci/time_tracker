@@ -7,10 +7,6 @@ class TasksController < ApplicationController
     @begin_sheet_date = Date.current.beginning_of_month
   end
 
-  def show
-    @task = Task.find(params[:id])
-  end
-
   def new
     @task = Task.new
   end
