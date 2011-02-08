@@ -10,11 +10,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110204170541) do
+ActiveRecord::Schema.define(:version => 20110208111917) do
 
   create_table "entries", :force => true do |t|
     t.date     "begin"
-    t.integer  "duration"
+    t.float    "duration"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "task_id"
