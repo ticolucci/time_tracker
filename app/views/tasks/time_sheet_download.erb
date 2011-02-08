@@ -2,7 +2,7 @@
 
 <% days_total = [] %>
 Task\Date<% (@from_date.day..@from_date.end_of_month.day).each do |day|; %>;<%=h day %><% days_total[day-1] = 0 ;%><% end %>
-<% @tasks.each do |task|; %><%=h task.description.chomp %><% entries = task.entries.select {|e| e.begin >= @from_date} ;%><% (@from_date.day..@from_date.end_of_month.day).each do |day|; %>;<% if entries.empty? %>0<% else %><%= task_duration =  entries.first.begin.day == day ? entries.shift.duration : 0 ;days_total[day-1] += task_duration; task_duration %><% end %><% end %>
+<% @tasks.each do |task|; %><%=h task.description.chomp %><% entries = task.entries.sort.select {|e| e.begin >= @from_date} ;%><% (@from_date.day..@from_date.end_of_month.day).each do |day|; %>;<% if entries.empty? %>0<% else %><%= task_duration =  entries.first.begin.day == day ? entries.shift.duration : 0 ;days_total[day-1] += task_duration; task_duration %><% end %><% end %>
 <% end %>
 
 Total per day<% days_total.each do |day_total|; %>;<%=h day_total %><% end %>

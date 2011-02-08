@@ -22,7 +22,7 @@
 	<% @tasks.each do |task| %>
 		<tr>
 			<td><%=h task.description %></td>
-			<% entries = task.entries.select {|e| e.begin >= @from_date} %>
+			<% entries = task.entries.sort.select {|e| e.begin >= @from_date} %>
 			<% (@from_date.day..@from_date.end_of_month.day).each do |day| %>
 				<td>
 					<% if entries.empty? %>
