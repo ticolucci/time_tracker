@@ -21,8 +21,8 @@
     	<td><%= task.description %></td>
 			<td><ul><% task.entries.sort.each do |entry| %> 
 				<li> At <%= entry.begin %> for <%=h pluralize entry.duration, 'hour' %> |
-					 <%= link_to "Edit", edit_task_entry_path(task, entry) %> | 
-					 <%= link_to "Destroy", task_entry_path(task, entry), :confirm => 'Are you sure you want to delete this entry?', :method => :delete  %> |</li>
+					 <%= link_to "Edit Entry", edit_task_entry_path(task, entry) %> | 
+					 <%= link_to "Destroy Entry", task_entry_path(task, entry), :confirm => 'Are you sure you want to delete this entry?', :method => :delete  %> |</li>
 			<% end %>
 			</ul></td>
       <td><%= link_to "Add Entry", new_task_entry_path(task) %></td>
@@ -31,8 +31,8 @@
 			<td></td>
 			<td></td>
 			<td></td>
-      <td><%= link_to "Edit", edit_task_path(task) %></td>
-      <td><%= link_to "Destroy", task, :confirm => 'Are you sure you want to delete tis task?', :method => :delete %></td>
+      <td><%= link_to "Edit Task", edit_task_path(task) %></td>
+      <td><%= link_to "Destroy Task", task, :confirm => 'Are you sure you want to delete tis task?', :method => :delete %></td>
     </tr>
   <% end %>
 </table>
